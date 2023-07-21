@@ -1,0 +1,86 @@
+#include <stdio.h>
+
+int nArray[50], wArray[50], nelem;
+
+int prime(int num);
+int percube(int num);
+
+void main()
+{
+    printf("\nEnter the number of elements in an array: ");
+    scanf("%d", &nelem);
+
+    printf("Enter %d elements\n", nelem);
+
+    // Calculate the weight
+    for (int i = 0; i < nelem; i++)
+        scanf("%d", &nArray[i]);
+
+    for (int i = 0; i < nelem; i++)
+        wArray[i] = 0;
+
+    for (int i = 0; i < nelem; i++)
+    {
+        if (percube(nArray[i]))
+            wArray[i] = wArray[i] + 5;
+
+        if (nArray[i] % 4 == 0 && nArray[i] % 6 == 0)
+            wArray[i] = wArray[i] + 4;
+
+        if (prime(nArray[i]))
+            wArray[i] = wArray[i] + 3;
+    }
+
+    // Sorting the array
+    for (int i = 0; i < nelem; i++)
+    {
+        for (int j = i + 1; j < nelem; j++)
+        {
+            if (wArray[i] > wArray[j])
+            {
+                int temp = wArray[i];
+                wArray[i] = wArray[j];
+                wArray[j] = temp;
+
+                temp = nArray[i];
+                nArray[i] = nArray[j];
+                nArray[j] = temp;
+            }
+        }
+    }
+
+    // Print the sorted array with their corresponding weights
+    printf("Sorted Array:\n");
+    for (int i = 0; i < nelem; i++)
+        printf("<%d,%d>\n", nArray[i], wArray[i]);
+}
+
+int prime(int num)
+{
+    int flag = 1;
+
+    for (int i = 2; i <= num / 2; i++)
+    {
+        if (num % i == 0)
+        {
+            flag = 0;
+            break;
+        }
+    }
+    return flag;
+}
+
+int percube(int num)
+{
+    int flag = 0;
+
+    for (int i = 2; i <= num / 2; i++)
+    {
+        if (i * i * i == num)
+        {
+            flag = 1;
+            break;
+        }
+    }
+    return flag;
+}
