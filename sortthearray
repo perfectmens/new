@@ -10,7 +10,7 @@ void main()
     printf("\nEnter the number of elements in an array: ");
     scanf("%d", &nelem);
 
-    printf("Enter %d elements\n", nelem);
+   printf("Enter %d elements\n", nelem);
 
     // Calculate the weight
     for (int i = 0; i < nelem; i++)
